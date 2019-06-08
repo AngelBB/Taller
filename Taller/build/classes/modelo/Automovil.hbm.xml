@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-feb-2015 15:32:57 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Automovil" table="automovil" catalog="taller" optimistic-lock="version">
+        <id name="matricula" type="string">
+            <column name="matricula" length="7" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cliente" class="modelo.Cliente" fetch="select">
+            <column name="dni_propietario" length="9" not-null="true" />
+        </many-to-one>
+        <many-to-one name="concesionario" class="modelo.Concesionario" fetch="select">
+            <column name="cod_concesionario" not-null="true" />
+        </many-to-one>
+        <property name="modelo" type="string">
+            <column name="modelo" length="3" not-null="true" />
+        </property>
+        <property name="marca" type="string">
+            <column name="marca" length="20" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="20" not-null="true" />
+        </property>
+        <set name="reparas" table="repara" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="matricula" length="7" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Repara" />
+        </set>
+    </class>
+</hibernate-mapping>

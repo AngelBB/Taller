@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-feb-2015 15:32:57 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Repara" table="repara" catalog="taller" optimistic-lock="version">
+        <composite-id name="id" class="modelo.ReparaId">
+            <key-property name="dniMecanico" type="string">
+                <column name="dni_mecanico" length="9" />
+            </key-property>
+            <key-property name="matricula" type="string">
+                <column name="matricula" length="7" />
+            </key-property>
+            <key-property name="numHoras" type="int">
+                <column name="num_horas" />
+            </key-property>
+            <key-property name="fecha" type="date">
+                <column name="fecha" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="automovil" class="modelo.Automovil" update="false" insert="false" fetch="select">
+            <column name="matricula" length="7" not-null="true" />
+        </many-to-one>
+        <many-to-one name="mecanico" class="modelo.Mecanico" update="false" insert="false" fetch="select">
+            <column name="dni_mecanico" length="9" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
